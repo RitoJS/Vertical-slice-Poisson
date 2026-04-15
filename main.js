@@ -15,7 +15,7 @@ const renderer = new THREE.WebGLRenderer({
 
 //Add background Texture
 const loader = new THREE.TextureLoader();
-const bgTexture = loader.load('public/images/panorama.jpg', 
+const bgTexture = loader.load('images/panorama.jpg', 
     () => {
         bgTexture.mapping = THREE.EquirectangularReflectionMapping;
         bgTexture.colorSpace = THREE.SRGBColorSpace;
