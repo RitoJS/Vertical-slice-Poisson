@@ -10,7 +10,7 @@ const renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
 });
-renderer.setSize( window.innerWidth, window.innerHeight );
+// renderer.setSize( window.innerWidth, window.innerHeight );
 // document.body.appendChild( renderer.domElement );
 
 //Add background Texture
