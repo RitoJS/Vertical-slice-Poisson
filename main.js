@@ -10,6 +10,7 @@ const renderer = new THREE.WebGLRenderer({
     canvas,
     alpha: true,
 });
+
 // renderer.setSize( window.innerWidth, window.innerHeight );
 // document.body.appendChild( renderer.domElement );
 
@@ -46,6 +47,12 @@ light.position.set(-1, 2, 4);
 scene.add(light);
 
 function animate(time) {
+    //Always check the size difference
+    if (resizeRendererForCanvasDisplay(renderer)) {
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+    }
     cube.rotation.x = time / 2000;
     cube.rotation.y = time / 1000;
     // Set the repeat and offset properties of the background texture
@@ -61,6 +68,18 @@ function animate(time) {
     bgTexture.offset.y = aspect > 1 ? 0 : (1 - aspect) / 2;
     bgTexture.repeat.y = aspect > 1 ? 1 : aspect;
     renderer.render(scene, camera);
+}
+
+function resizeRendererForCanvasDisplay(renderer) {
+    const canvas = renderer.domElement;
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+    // We set the condition to adjust the size
+    const needResize = canvas.width !== width || canvas.height !== height;
+    if (needResize) {
+        renderer.setSize(width, height, false);
+    }
+    return needResize;
 }
 
 renderer.setAnimationLoop(animate)
